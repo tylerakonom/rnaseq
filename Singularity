@@ -37,7 +37,7 @@ From: ubuntu:16.04
     apt-get -y install build-essential gfortran
 
     # install some bioinfo tools from Bioconda
-    conda install -y -c bioconda cutadapt fastqc hisat2 samtools rsem bowtie2 trimmomatic
+    conda install -y -c bioconda cutadapt fastqc hisat2 samtools rsem trimmomatic
     
 
 %environment
