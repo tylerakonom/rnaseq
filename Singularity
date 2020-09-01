@@ -1,5 +1,5 @@
 BootStrap: docker
-From: ubuntu:16.10
+From: ubuntu:20.04
 
 ##################################
 #notes from andy:
