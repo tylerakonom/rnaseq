@@ -1,0 +1,7 @@
+Host *login*.rc.colorado.edu
+	ControlMaster auto
+	ControlPath /tmp/ssh_mux_%u_%h_%p_%r 
+
+Host *login*.fiji.colorado.edu
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%u_%h_%p_%r
