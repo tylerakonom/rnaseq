@@ -1,5 +1,5 @@
 BootStrap: docker
-From: ubuntu:20.04
+From: ubuntu:20.10
 
 ##################################
 #notes from andy:
@@ -17,7 +17,7 @@ From: ubuntu:20.04
     # this is a X11 dep
     apt-get -y install libxext6
     # tools to open PDF and HTML files
-    apt-get -y install firefox xpdf
+    #apt-get -y install firefox xpdf
     # some extra devel libs
     apt-get -y install zlib1g-dev libssl-dev libpng-dev uuid-dev
     # other
@@ -37,7 +37,7 @@ From: ubuntu:20.04
     apt-get -y install build-essential gfortran
 
     # install some bioinfo tools from Bioconda
-    conda install -y -c bioconda cutadapt fastqc hisat2 samtools rsem trimmomatic
+    conda create -y -n rnaseq2 -c bioconda cutadapt fastqc hisat2 samtools rsem bowtie2 trimmomatic
     
 
 %environment
@@ -46,3 +46,5 @@ From: ubuntu:20.04
     export LC_ALL=en_US.UTF-8
     export XDG_RUNTIME_DIR=""
     export PATH=/opt/miniconda3/bin:$PATH
+    echo "source /opt/miniconda3/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+    echo "conda activate rnaseq2" >> $SINGULARITY_ENVIRONMENT
