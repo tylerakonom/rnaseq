@@ -6,7 +6,7 @@ From: ubuntu:20.10
 
 #I didn't check to see if any genomics databases were needed
 #these can generally be installed outside the container
-#but sometimes they need environment variables to be set 
+#but sometimes they need environment variables to be set
 ##################################
 
 %post
@@ -34,17 +34,22 @@ From: ubuntu:20.10
     conda config --add channels bioconda
 
     # install some dependencies to build R packages
-    apt-get -y install build-essential gfortran
+    # apt-get -y install build-essential gfortran
 
     # install some bioinfo tools from Bioconda
     conda create -y -n rnaseq2 -c bioconda cutadapt fastqc hisat2 samtools rsem bowtie2 trimmomatic
-    
+
+#create a runscript so that conda is correctly invoked in bash
+echo '#!/bin/bash' >/opt/runscript
+echo '. "/opt/miniconda3/etc/profile.d/conda.sh"' >>/opt/runscript
+echo 'conda activate rnaseq2' >>/opt/runscript
+echo '$@' >>/opt/runscript
+
+%runscript
+bash /opt/runscript "$@"
 
 %environment
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US:en
     export LC_ALL=en_US.UTF-8
     export XDG_RUNTIME_DIR=""
-    export PATH=/opt/miniconda3/bin:$PATH
-    echo "source /opt/miniconda3/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
-    echo "conda activate rnaseq2" >> $SINGULARITY_ENVIRONMENT
